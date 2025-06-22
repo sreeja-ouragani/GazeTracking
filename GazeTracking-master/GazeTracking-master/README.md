@@ -1,160 +1,72 @@
+# 👀 Your Eyes, Your Cursor! – Real-Time Gaze Tracking System 🚀
 
-## Installation
+Welcome to our open-source real-time **gaze tracking system**—a hands-free interface that allows users to interact with screens, games, and devices using just their **eye movements**!
 
-Clone this project:
+## 🔥 Project Highlights
 
-```shell
-git clone https://github.com/antoinelame/GazeTracking.git
-```
+✨ **Real-Time Eye Tracking:**  
+Track gaze direction with impressive **precision and speed**, enabling seamless interaction with digital interfaces.
 
-### For Pip install
-Install these dependencies (NumPy, OpenCV, Dlib):
+🎮 **Interactive & Versatile Applications:**  
+Ideal for **gaming**, **UX research**, and **accessibility** tools.
 
-```shell
-pip install -r requirements.txt
-```
+♿ **Assistive Technology Integration:**  
+Designed to empower users with disabilities by offering **hands-free control** for navigating and interacting with devices.
 
-> The Dlib library has four primary prerequisites: Boost, Boost.Python, CMake and X11/XQuartx. If you doesn't have them, you can [read this article](https://www.pyimagesearch.com/2017/03/27/how-to-install-dlib/) to know how to easily install them.
+🧠 **HCI Innovation:**  
+Pushes the boundary in **Human-Computer Interaction**, paving the way for more intuitive, human-centric tech.
+
+---
+
+## 🌟 Features
+
+- ✅ Real-time eye movement detection and tracking
+- ✅ Cursor movement controlled by gaze direction
+- ✅ Fast and lightweight performance
+- ✅ Modular codebase for easy integration into other systems
+- ✅ Built-in support for webcam input
+- ✅ Expandable for games, accessibility tools, and research
+
+---
+
+## 🚧 Upcoming Features
+
+We’re currently working on:
+
+🔤 **Gaze-Controlled Virtual Keyboard**  
+Type with your eyes—perfect for users with mobility challenges or hands-free environments.
+
+🔧 **Enhanced Calibration**  
+Improve accuracy across different face shapes, lighting conditions, and webcam qualities.
+
+📱 **Mobile Support (Beta)**  
+Track eye movement using mobile device cameras.
+
+---
+
+## 🧠 How It Works
+
+1. Captures eye region from webcam feed  
+2. Uses facial landmark detection to isolate pupils  
+3. Tracks relative movement and maps gaze direction to screen coordinates  
+4. Moves the cursor accordingly in real time
+
+---
+
+## 🛠️ Tech Stack
+
+- Python (OpenCV, Dlib, Pygame / PyAutoGUI)
+- Machine Learning for Eye Feature Detection
+- Real-Time Frame Processing
+- Webcam Input Stream Processing
+
+---
+
+## 🚀 Getting Started
+
+### 🔧 Prerequisites
+
+- Python 3.7+
+- Webcam (built-in or external)
 
 
-### For Anaconda install
-Install these dependencies (NumPy, OpenCV, Dlib):
-
-```shell
-conda env create --file environment.yml
-#After creating environment, activate it
-conda activate GazeTracking
-```
-
-
-### Verify Installation
-
-Run the demo:
-
-```shell
-python example.py
-```
-
-## Simple Demo
-
-```python
-import cv2
-from gaze_tracking import GazeTracking
-
-gaze = GazeTracking()
-webcam = cv2.VideoCapture(0)
-
-while True:
-    _, frame = webcam.read()
-    gaze.refresh(frame)
-
-    new_frame = gaze.annotated_frame()
-    text = ""
-
-    if gaze.is_right():
-        text = "Looking right"
-    elif gaze.is_left():
-        text = "Looking left"
-    elif gaze.is_center():
-        text = "Looking center"
-
-    cv2.putText(new_frame, text, (60, 60), cv2.FONT_HERSHEY_DUPLEX, 2, (255, 0, 0), 2)
-    cv2.imshow("Demo", new_frame)
-
-    if cv2.waitKey(1) == 27:
-        break
-```
-
-## Documentation
-
-In the following examples, `gaze` refers to an instance of the `GazeTracking` class.
-
-### Refresh the frame
-
-```python
-gaze.refresh(frame)
-```
-
-Pass the frame to analyze (numpy.ndarray). If you want to work with a video stream, you need to put this instruction in a loop, like the example above.
-
-### Position of the left pupil
-
-```python
-gaze.pupil_left_coords()
-```
-
-Returns the coordinates (x,y) of the left pupil.
-
-### Position of the right pupil
-
-```python
-gaze.pupil_right_coords()
-```
-
-Returns the coordinates (x,y) of the right pupil.
-
-### Looking to the left
-
-```python
-gaze.is_left()
-```
-
-Returns `True` if the user is looking to the left.
-
-### Looking to the right
-
-```python
-gaze.is_right()
-```
-
-Returns `True` if the user is looking to the right.
-
-### Looking at the center
-
-```python
-gaze.is_center()
-```
-
-Returns `True` if the user is looking at the center.
-
-### Horizontal direction of the gaze
-
-```python
-ratio = gaze.horizontal_ratio()
-```
-
-Returns a number between 0.0 and 1.0 that indicates the horizontal direction of the gaze. The extreme right is 0.0, the center is 0.5 and the extreme left is 1.0.
-
-### Vertical direction of the gaze
-
-```python
-ratio = gaze.vertical_ratio()
-```
-
-Returns a number between 0.0 and 1.0 that indicates the vertical direction of the gaze. The extreme top is 0.0, the center is 0.5 and the extreme bottom is 1.0.
-
-### Blinking
-
-```python
-gaze.is_blinking()
-```
-
-Returns `True` if the user's eyes are closed.
-
-### Webcam frame
-
-```python
-frame = gaze.annotated_frame()
-```
-
-Returns the main frame with pupils highlighted.
-
-## You want to help?
-
-Your suggestions, bugs reports and pull requests are welcome and appreciated. You can also starring ⭐️ the project!
-
-If the detection of your pupils is not completely optimal, you can send me a video sample of you looking in different directions. I would use it to improve the algorithm.
-
-## Licensing
-
-This project is released by Rallabandi varshith under the terms of the MIT Open Source License. View LICENSE for more information.
